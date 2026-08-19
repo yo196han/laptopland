@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== المتغيرات العامة ===== */
+:root {
+  --purple-primary: #7B2FBE;
+  --purple-accent: #A855F7;
+  --purple-neon: #C084FC;
+  --purple-glow: rgba(168, 85, 247, 0.4);
+  --transition-speed: 0.3s;
+}
+
+/* ===== الوضع الداكن (افتراضي) ===== */
+.dark {
+  --bg-base: #0D0D0F;
+  --bg-surface: #1A1025;
+  --bg-card: #1E1535;
+  --bg-nav: rgba(13, 13, 15, 0.85);
+  --border: rgba(168, 85, 247, 0.2);
+  --border-hover: rgba(168, 85, 247, 0.6);
+  --text-primary: #FFFFFF;
+  --text-muted: #A0A0B0;
+  --text-faint: #6B6B80;
+  --shadow-glow: 0 0 20px rgba(168, 85, 247, 0.3);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --specs-bg: rgba(168, 85, 247, 0.08);
+}
+
+/* ===== الوضع الفاتح ===== */
+.light {
+  --bg-base: #F5F3FF;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-nav: rgba(245, 243, 255, 0.90);
+  --border: rgba(123, 47, 190, 0.15);
+  --border-hover: rgba(123, 47, 190, 0.5);
+  --text-primary: #1A0A2E;
+  --text-muted: #4A3B6B;
+  --text-faint: #8B7BAE;
+  --shadow-glow: 0 0 20px rgba(123, 47, 190, 0.15);
+  --shadow-card: 0 4px 24px rgba(123, 47, 190, 0.1);
+  --specs-bg: rgba(123, 47, 190, 0.06);
+}
+
+/* ===== الأساسيات ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Cairo', sans-serif;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ===== شريط التمرير ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--purple-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-accent);
+}
+
+/* ===== تأثير النيون على العناوين ===== */
+.neon-text {
+  text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+}
+
+/* ===== بطاقة زجاجية ===== */
+.glass {
+  background: var(--bg-nav);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+}
+
+/* ===== تأثير الإظهار عند التمرير ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== خلفية دوائر كهربائية ===== */
+.circuit-bg {
+  background-image: 
+    linear-gradient(rgba(168, 85, 247, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.06) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ===== تقليل الحركة ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ===== خريطة جوجل في الوضع الداكن ===== */
+.dark .maps-iframe {
+  filter: invert(90%) hue-rotate(200deg) saturate(0.8);
+}
+.light .maps-iframe {
+  filter: none;
+}
+
+/* ===== تأثير الشفق البنفسجي ===== */
+.hero-vignette {
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(168, 85, 247, 0.1) 100%);
+}
+.light .hero-vignette {
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(123, 47, 190, 0.08) 100%);
+}
+
+/* ===== تأثير التحميل Skeleton ===== */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-card) 50%, var(--bg-surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ===== زر سوشيال ميديا ===== */
+.social-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 32px;
+  border-radius: 9999px;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  min-width: 160px;
+}
+.social-btn:hover {
+  transform: translateY(-4px);
+}
+
+/* ===== شارة المنتج ===== */
+.badge-ribbon {
+  position: absolute;
+  top: 12px;
+  right: -32px;
+  transform: rotate(45deg);
+  padding: 4px 40px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  z-index: 10;
+}
+
+/* ===== تأثير hover على البطاقات ===== */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-glow);
+  border-color: var(--border-hover);
+}
+
+/* ===== تأثير shimmer على حافة البطاقة ===== */
+.card-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--purple-neon), transparent);
+  transition: left 0.5s ease;
+}
+.card-shimmer:hover::before {
+  left: 100%;
+}
